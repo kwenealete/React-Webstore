@@ -45,12 +45,12 @@ export default function CreateProduct() {
         <Form
             onSubmit = {async e => {
                 e.preventDefault();
-                //submitting inputs fileds to the backend
 
+                //submitting inputs fileds to the backend
                 const res = await createProduct();
                 clearForm(); 
-                //Pushing product to its page
                 
+                //Pushing product to its page                
                 Router.push({
                     pathname: `/product/${res.data.createProduct.id}`
                 })
