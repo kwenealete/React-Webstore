@@ -6,6 +6,7 @@ import { ProductImage } from './schemas/ProductImage';
 import 'dotenv/config';
 import { withItemData, statelessSessions } from '@keystone-next/keystone/session';
 import { insertSeedData } from './seed-data';
+import { sendPasswordResetEmail } from './lib/mail';
 
 
 const databaseURL = process.env.DATABASE_URL || 'mongodb://localhost/keystone-techworld-tutorial';
@@ -22,8 +23,16 @@ const { withAuth } = createAuth({
     initFirstItem: {
         fields: [ 'name', 'email', 'password' ],
         //Adding initial roles to be done 
-    }
-})
+    },
+    passwordResetLink: {
+        async sendToken(args) {
+            
+            // send the email
+            await sendPasswordResetEmail(args.token, args.identity);
+            
+        },
+    },
+});
 
 export default withAuth(config({
     //@ts-ignore
