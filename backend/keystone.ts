@@ -1,8 +1,10 @@
 import {createAuth} from '@keystone-next/auth';
 import { config, createSchema } from '@keystone-next/keystone/schema';
 import { User } from './schemas/User';
+import { extendGraphqlSchema } from './mutations/index';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
+import { CartItem } from './schemas/CartItem';
 import 'dotenv/config';
 import { withItemData, statelessSessions } from '@keystone-next/keystone/session';
 import { insertSeedData } from './seed-data';
@@ -58,8 +60,10 @@ export default withAuth(config({
         // Schema items
         User,
         Product,
-        ProductImage
+        ProductImage,
+        CartItem
     }),
+    extendGraphqlSchema,
     ui: {
         isAccessAllowed: ({ session }) => {
             // console.log(session);
