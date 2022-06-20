@@ -5,6 +5,8 @@ import { extendGraphqlSchema } from './mutations/index';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
 import { CartItem } from './schemas/CartItem';
+import { OrderItem } from './schemas/OrderItem';
+import { Order } from './schemas/Order';
 import 'dotenv/config';
 import { withItemData, statelessSessions } from '@keystone-next/keystone/session';
 import { insertSeedData } from './seed-data';
@@ -61,7 +63,9 @@ export default withAuth(config({
         User,
         Product,
         ProductImage,
-        CartItem
+        CartItem,
+        OrderItem,
+        Order
     }),
     extendGraphqlSchema,
     ui: {
