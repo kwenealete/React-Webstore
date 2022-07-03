@@ -8,9 +8,11 @@ import { ProductImage } from './schemas/ProductImage';
 import { CartItem } from './schemas/CartItem';
 import { OrderItem } from './schemas/OrderItem';
 import { Order } from './schemas/Order';
+import { Role } from './schemas/Role';
 import { withItemData, statelessSessions } from '@keystone-next/keystone/session';
 import { insertSeedData } from './seed-data';
 import { sendPasswordResetEmail } from './lib/mail';
+import { permissionsList } from './schemas/fields';
 
 
 const databaseURL = process.env.DATABASE_URL || 'mongodb://localhost/keystone-techworld-tutorial';
@@ -65,7 +67,8 @@ export default withAuth(config({
         ProductImage,
         CartItem,
         OrderItem,
-        Order
+        Order,
+        Role
     }),
     extendGraphqlSchema,
     ui: {
@@ -77,6 +80,6 @@ export default withAuth(config({
     },
     //Adding session values
     session: withItemData(statelessSessions(sessionConfig),{
-        User: `id`
+        User: `id name email role { ${permissionsList.join(' ')} }`
     })
 }));
