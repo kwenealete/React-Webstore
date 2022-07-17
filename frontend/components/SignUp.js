@@ -79,9 +79,11 @@ export default function SignUp() {
 
                     />
                 </label>
-                <button type="submit">Sign In!</button>
+                <button type="submit">Sign Up!</button>
             </fieldset>
         </Form>
     );
     
 }
+
+export { SIGNUP_MUTATION };
