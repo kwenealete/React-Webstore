@@ -58,3 +58,5 @@ export default function RequestReset() {
     );
     
 }
+
+export { REQUEST_RESET_MUTATION };
