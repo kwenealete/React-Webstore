@@ -1,8 +1,10 @@
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
-import DisplayError from '../components/ErrorMessage';
-import styled from 'styled-components';
 import Head from 'next/head';
+import styled from 'styled-components';
+import DisplayError from '../components/ErrorMessage';
+
+
 
 const ProductStyles = styled.div`
     display: grid;
@@ -43,7 +45,7 @@ export default function SingleProduct({ id }) {
     if(error) return <DisplayError error={error} />;
     const { Product } = data;
     return( 
-        <ProductStyles>
+        <ProductStyles data-testid="singleProduct">
             <Head>
                 <title>Sick Fits | {Product.name}</title>
             </Head>
@@ -57,3 +59,5 @@ export default function SingleProduct({ id }) {
         </ProductStyles>
     )
 }
+
+export { SINGLE_ITEM_QUERY };
